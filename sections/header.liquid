@@ -118,7 +118,7 @@
                         <div>{{ link.title }}</div>
                         {% render 'icon-dropdown' %}
                       </button>
-                      <div x-show="{{ mobile_link_handle }}" class="grid gap-y-7 py-3">
+                      <div x-show="{{ mobile_link_handle }}" class="grid py-3">
                         {% for childLink in link.links %}
                           <a href="{{ childLink.url }}" class="-m-3 p-3 mt-2 flex items-center rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-50">
                             <span class="ml-3">{{ childLink.title }}</span>
