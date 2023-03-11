@@ -12,32 +12,6 @@
     {{ 'application.css' | asset_url | stylesheet_tag }}
     {{ 'application.js' | asset_url | script_tag }}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>
-      .sub_link {
-        position: absolute;
-        z-index: 10;
-        top: -50%;
-        width: 100vw;
-        max-width: 448px;
-        {% comment %}
-          transform: translateX(-50%);
-        {% endcomment %}
-        opacity: 0;
-      }
-
-      .nav_link:hover {
-        background-color: green;
-      }
-
-      .nav_link:hover + .sub_link {
-        {% comment %}
-          transform: translateX(50%);
-        {% endcomment %}
-        top: 50%;
-        opacity: 1;
-
-      }
-    </style>
   </head>
   <body>
 
