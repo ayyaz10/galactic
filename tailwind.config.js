@@ -8,7 +8,7 @@ module.exports = {
     "./snippets/*.liquid",
     "./templates/*.liquid",
     "./templates/*.json",
-    // "./templates/customers/*.liquid",
+    "./templates/customers/*.liquid",
   ],
   theme: {
     extend: {},
