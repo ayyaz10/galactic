@@ -1,0 +1,9 @@
+{
+    "name": "Template 404",
+    "sections": {
+        "template": { //section id
+            "type": "template-404" //section attribute
+        }
+    },
+    "order": ["template"]
+}
