@@ -62,9 +62,9 @@ wrapper: optional
 sections
 order
 
-create json file
-create a section in SECTIONS object and write SECTION ID
-add a TYPE
-add a SECTION ID to ORDER array
-Then create a Liquid page in sections folder and name it the same as the section type you named
-In this liquid page you can write the html and settings of this page.
+- create json file
+- create a section in SECTIONS object and write SECTION ID
+- add a TYPE
+- add a SECTION ID to ORDER array
+- Then create a Liquid page in sections folder and name it the same as the section type you named
+- In this liquid page you can write the html and settings of this page.
