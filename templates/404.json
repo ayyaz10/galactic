@@ -1,8 +1,8 @@
 {
     "name": "Template 404",
     "sections": {
-        "template": { //section id
-            "type": "template-404" //section attribute
+        "template": {
+            "type": "template-404" 
         },
         "404-bottom": {
             "type": "call-to-action" 
