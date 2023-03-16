@@ -3,7 +3,10 @@
     "sections": {
         "template": { //section id
             "type": "template-404" //section attribute
+        },
+        "404-bottom": {
+            "type": "call-to-action" 
         }
     },
-    "order": ["template"]
+    "order": ["template", "404-bottom"]
 }
