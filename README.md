@@ -55,7 +55,7 @@
 
 
 ## JSON Template
-JSON templates must be valid JSON files. The root shoudl be an object with the following attributes:
+### JSON templates must be valid JSON files. The root shoudl be an object with the following attributes:
 name
 layout: optional
 wrapper: optional
