@@ -1,18 +1,18 @@
-<article class="py-8"> 
+<article class="py-8" itemscope itemtype="https://schema.org/BlogPosting"> 
   {% for block in section.blocks %}
     {% case block.type %}
       {% when "article_title" %}
         <div class="flex items-center justify-center">
           <div class="max-w-7xl text-center">
             <a href="{{ blog.url }}" class="text-base uppercase text-gray-500 hover:text-gray-900 font-bold">{{ blog.title }}</a>
-            <h1 class="text-4xl md:text-6xl font-medium">{{ article.title}}</h1>
+            <h1 class="text-4xl md:text-6xl font-medium" itemprop="headline">{{ article.title}}</h1>
           </div>
         </div>
       {% when 'article_author' %}
         <div class="flex items-center justify-center">
-          <div class="max-w-7xl text-center">
+          <div class="max-w-7xl text-center" itemscope itemtype="https://schema.org/Person">
             {% if section.settings.enable_author %}
-              <small>{{ article.author }}</small>
+              <small itemprop="author">{{ article.author }}</small>
             {% endif %}
           </div>
         </div>
@@ -20,12 +20,12 @@
         <div class="flex items-center justify-center">
           <div class="max-w-7xl text-center">
             {% if section.settings.enable_published_date %}
-              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format:'on_date' }}</time>
-            </div>
+              <time itemprop="datePublished dateCreated" datetime="{{ article.published_at | date: '%Y-%m-%d' }}" >{{ article.published_at | date: format:'on_date' }}</time>
             {% endif %}
+          </div>
         </div>
       {% when 'featured_image' %}
-        <div class="max-w-7xl border-green bg-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidden my-4">
+        <div itemprop="image" class="max-w-7xl border-green bg-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidden my-4">
           {% if article.image != blank %}
             <img class="w-full h-80 md:h-96 object-cover object-center" src="{{ article.image | img_url: 'large' }}" alt="{{ article.image.alt }}">
             {% else %}
@@ -35,7 +35,7 @@
         </div>
       {% when 'article_content' %}
           <div class="flex items-center justify-center">
-            <div class="max-w-5xl px-4 md:px-auto">
+            <div itemprop="articleBody" class="max-w-5xl px-4 md:px-auto">
               {{ article.content }}
             </div>
           </div>
@@ -77,17 +77,29 @@
 
         {% if form.errors %}
           <div class="border p-5">
-            <div class="flex flex-row items-center w-full my-5">
+            <div class="flex flex-row items-center w-full my-3">
               <div class="text-red-500">
                 {% render 'icon-failed' %}
               </div>
               <div class="text-sm font-medium ml-3">
-                Oh no! Your commentwas not posted.
+                Oh no! Your comment was not posted.
               </div>
             </div>
+            <ul class="px-4 mb-3 ml-7 list-decimal">
+              {% for error in form.errors %}
+                <li>
+                  <span>{{ form.errors.messages[error] }}</span>
+                </li>
+              {% endfor %}
+            </ul>
           </div>
-          {% elseif form.posted_succesfully? %}
-            Comment is posted succesfully
+          {% elsif form.posted_successfully? %} 
+            <div class="flex flex-row items-center wi-full my-3 p-5">
+              <div class="text-green-500">
+                {% render 'icon-success' %}
+              </div>
+              <div class="text-sm font-medium ml-3">Comment is posted successfully</div>
+            </div>
         {% endif %}
 
         <div class="px-1 md:flex mb-3">
@@ -129,8 +141,6 @@
     {% endform %}
   </div>
 {% endif %}
-
-
 
 
 
@@ -191,4 +201,50 @@ image.alt
 content
 }
 
+Rendering Article Details and Comments
+
+Step 1: Article Details Rendering
+1.1. Iterate over each block in the 'section.blocks' using a for loop.
+1.2. For each 'block', check its type using the 'case' statement.
+1.3. If the type of the block is 'article_title', display the blog title and article title using HTML tags and the liquid variables 'blog.url', 'blog.title', and 'article.title'.
+1.4. If the type of the block is 'article_author', display the author of the article using HTML tags and the liquid variable 'article.author'.
+1.5. If the type of the block is 'article_published_date', display the published date of the article using HTML tags and the liquid variable 'article.published_at'.
+1.6. If the type of the block is 'featured_image', display the image for the article using HTML tags and the liquid variables 'article.image' and 'article.image.alt'.
+1.7. If the type of the block is 'article_content', display the content of the article using HTML tags and the liquid variable 'article.content'.
+1.8. If the type of the block is not recognized, display 'no content available'.
+
+Step 2: Displaying Comments
+2.1. Check if the comments are enabled for the blog using the liquid variable 'blog.comments_enabled?'.
+2.2. If comments are enabled, display the comments for the article using the liquid variables 'article.comments' and 'article.comments_count'.
+2.3. If there are comments for the article, iterate over each comment using a for loop and display the author, created_at, and content of the comment using HTML tags and the liquid variables 'comment.author', 'comment.created_at', and 'comment.content'.
+2.4. If there are more than one page of comments, display the pagination using the liquid variable 'paginate'.
+2.5. If there are no comments for the article, display 'There are no comments in this article'.
+2.6. Display a comment form using the 'form' tag and the liquid variable 'article' to specify the article for which the comment form is being displayed.
+2.7. If there are errors in the form submission, display the errors using HTML tags and the liquid variable 'form.errors'.
+2.8. If the form is submitted successfully, display a success message using HTML tags and the liquid variable 'form.posted_successfully?'.
+2.9. Display the input fields for the comment form using HTML tags and the liquid variables 'comment.author', 'comment.email', 'comment.body'.
+
 date: '%Y-%m-%day' {% endcomment %}
+
+
+{% comment %} SEO Guideline
+
+Heading: Schema.org Settings in a Blog Article Template
+
+Guideline:
+
+Identify the HTML tag with itemscope and itemtype attributes, which define the main content of the blog post. In this case, it's the article tag with itemscope and itemtype="https://schema.org/BlogPosting" attributes.
+
+Identify the HTML tags with itemscope and itemtype attributes, which define sub-content within the main content. In this case, there are two:
+
+The div tag with itemscope and itemtype="https://schema.org/Person" attributes, which defines the author of the article.
+The time tag with itemprop="datePublished dateCreated" attribute, which defines the date the article was published.
+Identify the HTML tag with itemprop attribute, which defines the featured image of the article. In this case, it's the div tag with itemprop="image" attribute.
+
+Identify the HTML tag with itemprop attribute, which defines the body content of the article. In this case, it's the div tag with itemprop="articleBody" attribute. 
+
+
+Test the SEO from this URL https://search.google.com/
+SEO according to Schema.org: https://schema.org/
+
+{% endcomment %}
