@@ -1,3 +1,7 @@
+{% for page in pages %}
+  <h1>{{page}}</h1>
+{% endfor %}
+<h1>{{pages.contact.title}}</h1>
  <article class="py-8" itemscope itemtype="https://schema.org/BlogPosting">{% comment %} <<<< MicroData Scheme {% endcomment %}
   {% for block in section.blocks %}
     {% case block.type %}

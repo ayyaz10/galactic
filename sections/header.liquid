@@ -74,14 +74,14 @@
 
       <!-- Cart Button / Account links if enabled -->
       <div class="hidden md:flex items-center justify-end md:flex-1 space-x-5">
-        <a href="/cart" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
+        <a href="{{ routes.cart_url }}" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
           {% render 'icon-shopping-bag' %}
         </a>
         {% comment %} here we check if guests are allowed to create an account {% endcomment %}
         {% if shop.customer_accounts_enabled %}
           {% comment %} here we check whether it is a loged in user or guest user {% endcomment %}
           {% if customer %}
-            <a href="/account" class="text-base text-gray-500 hover:text-gray-900">Acount</a>
+            <a href="{{ routes.account_url }}" class="text-base text-gray-500 hover:text-gray-900">Acount</a>
             {{ 'Log out' | customer_logout_link | replace: '<a', '<a class="text-base text-gray-500 hover:text-gray-900"' }}
           {% else %}
             {{ 'Login' | customer_login_link | replace: '<a', '<a class="text-base text-gray-500 hover:text-gray-900"' }}
